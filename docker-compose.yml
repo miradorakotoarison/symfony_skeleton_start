@@ -8,5 +8,19 @@ services:
     networks:
       - symfon_network
 
+  web:
+    image: nginx:alpine
+    container_name: symfony-nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/app
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    depends_on:
+      - app
+    networks:
+      - symfon_network
+
+
 networks:
   symfon_network:
